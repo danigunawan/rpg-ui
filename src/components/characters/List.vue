@@ -41,11 +41,6 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-
-      this.axios.get('/json/flash.json')
-        .then((response) => {
-          
-        })
     },
     rowClickedHandler (record) {
       console.log(record['ID'])
