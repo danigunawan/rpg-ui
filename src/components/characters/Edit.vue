@@ -39,7 +39,6 @@ export default {
       name: '',
       description: '',
       show: false,
-      characters: []
     }
   },
 
@@ -55,24 +54,14 @@ export default {
       console.log('Alert dismissed')
     },
     fetchData: function () {
-      this.axios.get('/json/characters.json')
+      this.axios.get('/v1/characters/' + this.$route.params.id)
         .then((response) => {
-          this.characters = response.data
-          this.displayData()
+          this.name = response.data["name"]
+          this.description = response.data["description"]
         })
         .catch(function (error) {
           console.log(error)
         });
-    },
-    displayData: function () {
-      for (var i = 0; i < this.characters.length; i++) {
-        console.log('Searching characters...')
-        if (this.characters[i]['ID'] === this.$route.params.id) {
-          console.log('Found ' + this.characters[i]['Name'])
-          this.name = this.characters[i]['Name']
-          this.description = this.characters[i]['Description']
-        }
-      }
     }
   }
 }

@@ -5,8 +5,8 @@
     :fields="fields"
     @row-clicked="rowClickedHandler"
   >
-    <template v-slot:cell(Delete)="row">
-      <b-button variant="danger" @click="deleteCharacter(row.item)" class="mr-1">
+    <template v-slot:cell(delete)="row">
+      <b-button variant="danger" @click="deleteCharacter(row.item)" class="mr-1 btn-delete">
         Delete
       </b-button>
     </template>
@@ -21,9 +21,9 @@ export default {
       message: 'Characters',
       characters: [],
       fields: [
-        { key: 'Name', label: 'Name' },
-        { key: 'Description', label: 'Description' },
-        { key: 'Delete', label: '' }
+        { key: 'name', label: 'Name' },
+        { key: 'description', label: 'Description' },
+        { key: 'delete', label: '' }
       ]
     }
   },
@@ -34,9 +34,10 @@ export default {
 
   methods: {
     fetchData: function () {
-      this.axios.get('http://localhost:8080/json/characters.json')
+      this.axios.get("/v1/characters")
+      //this.axios.get('http://localhost:8080/json/characters.json')
         .then((response) => {
-          this.characters = response.data
+          this.characters = response.data["characters"]
         })
         .catch(function (error) {
           console.log(error)
@@ -44,7 +45,7 @@ export default {
     },
     rowClickedHandler (record) {
       console.log(record['ID'])
-      this.$router.push({ name: 'CharacterEdit', params: { id: record['ID'] } })
+      this.$router.push({ name: 'CharacterEdit', params: { id: record['id'] } })
     },
     deleteCharacter: function (record) {
       /*this.axios.delete('/json/delete.json', {
@@ -70,5 +71,9 @@ export default {
 
 .btn {
   margin-bottom: 1rem;
+}
+
+.btn-delete {
+  float: right;
 }
 </style>

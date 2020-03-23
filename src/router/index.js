@@ -67,29 +67,27 @@ const routes = [
       middleware: [
         Auth
       ]
-    },
-    children: [
-      {
-        path: '/characters/new',
-        name: 'CharacterNew',
-        component: CharacterNew,
-        meta: {
-          middleware: [
-            Auth
-          ]
-        }
-      },
-      {
-        path: '/character/:id',
-        name: 'CharacterEdit',
-        component: CharacterEdit,
-        meta: {
-          middleware: [
-            Auth
-          ]
-        }
-      }
-    ]
+    }
+  },
+  {
+    path: '/characters/new',
+    name: 'CharacterNew',
+    component: CharacterNew,
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
+  },
+  {
+    path: '/character/:id',
+    name: 'CharacterEdit',
+    component: CharacterEdit,
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
   },
   {
     path: '/campaigns',

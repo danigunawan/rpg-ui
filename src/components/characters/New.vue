@@ -1,12 +1,10 @@
 <template>
   <b-container fluid>
-    <b-row class="form-row">
-      <b-col sm="12">
-        <b-alert v-model="show" class="mt-3" dismissible @dismissed="dismissed">
-          {{ name  }} created!
-        </b-alert>
-      </b-col>
-    </b-row>
+    <div v-if="errors">
+      <ul>
+        <li v-for="error in errors" :key="error.id"><span class="errors">{{ error }}</span></li>
+      </ul>
+    </div>
     <b-row class="form-row">
       <b-col sm="3">
         <label>Name:</label>
@@ -37,13 +35,24 @@ export default {
     return {
       name: '',
       description: '',
-      show: false
+      show: false,
+      errors: ''
     }
   },
 
   methods: {
     submitData: function() {
-      this.show = !this.show
+      this.axios.post("/v1/characters/new", {
+        name: this.name,
+        description: this.description
+      })
+      .then(response => {
+        console.log(response.data["message"])
+        this.$router.push({ name: "CharacterList" })
+      })
+      .catch(error => {
+        this.errors = error.response.data["error"].split('\n')
+      })
     },
     dismissed: function () {
       console.log("Alert dismissed")
