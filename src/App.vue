@@ -8,6 +8,7 @@
       <router-link :to='{name: "CharacterList"}'>Characters</router-link> |
       <router-link :to='{name: "CampaignsList"}'>Campaigns</router-link>
       <template v-if="loggedIn"> | <router-link :to='{name: "Logout"}'>Logout</router-link></template>
+      <template v-else> | <router-link :to='{name: "Login"}'>Login</router-link></template>
     </div>
     <hr />
     <router-view></router-view>
