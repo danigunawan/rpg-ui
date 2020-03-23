@@ -11,7 +11,7 @@ export default {
     // DELETE: {{host}}/v1/auth/
     // Data:
     //   Token
-    this.axios.delete(this.$store.state.target.url + '/v1/auth/', {
+    this.axios.delete('/v1/auth/', {
       headers: {
         'Authorization': this.$store.state.user.token
       }

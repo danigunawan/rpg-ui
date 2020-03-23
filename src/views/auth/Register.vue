@@ -74,10 +74,13 @@ export default {
       })
       .then(response => {
         console.log(response)
+        this.$store.state.user.token = response.data["token"]
+        localStorage.setItem("token", response.data["token"])
+        this.$router.push({ name: "Home" })
       })
       .catch(error => {
-        this.errors = error.response.data['error'].split('\n')
-        console.log(this.errors)
+        console.log(error.response.data["error"])
+        this.errors = error.response.data["error"].split("\n")
       })
     }
   }

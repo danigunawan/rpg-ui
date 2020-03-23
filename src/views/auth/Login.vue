@@ -73,7 +73,6 @@ export default {
       })
       .catch(errors => {
         this.errors = errors.response.data["error"].split('\n')
-        console.log(this.errors)
       })
     }
   }
