@@ -8,9 +8,6 @@ export default new Vuex.Store({
     user: {
       token: localStorage.getItem("token")
     },
-    target: {
-      url: "http://localhost:3000"
-    }
   },
   getters: {
     auth(state) {
