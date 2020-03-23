@@ -7,11 +7,22 @@
       <router-link :to='{name: "Home"}'>Home</router-link> |
       <router-link :to='{name: "CharacterList"}'>Characters</router-link> |
       <router-link :to='{name: "CampaignsList"}'>Campaigns</router-link>
+      <template v-if="loggedIn"> | <router-link :to='{name: "Logout"}'>Logout</router-link></template>
     </div>
     <hr />
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    loggedIn: function() {
+       return Boolean(this.$store.state.user.token)
+    }
+  }
+}
+</script>
 
 <style>
 hr {

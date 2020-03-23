@@ -34,7 +34,7 @@ export default {
 
   methods: {
     fetchData: function () {
-      this.axios.get('/json/characters.json')
+      this.axios.get('http://localhost:8080/json/characters.json')
         .then((response) => {
           this.characters = response.data
         })

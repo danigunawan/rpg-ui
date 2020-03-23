@@ -5,6 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: {
+      token: localStorage.getItem("token")
+    },
+    target: {
+      url: "http://localhost:3000"
+    }
+  },
+  getters: {
+    auth(state) {
+      return state.user
+    }
   },
   mutations: {
   },
