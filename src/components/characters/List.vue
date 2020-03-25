@@ -36,7 +36,7 @@ export default {
     fetchData: function () {
       this.axios.get("/v1/characters")
       //this.axios.get('http://localhost:8080/json/characters.json')
-        .then((response) => {
+        .then(response => {
           this.characters = response.data["characters"]
         })
         .catch(function (error) {
@@ -44,18 +44,19 @@ export default {
         })
     },
     rowClickedHandler (record) {
-      console.log(record['ID'])
+      console.log(record['id'])
       this.$router.push({ name: 'CharacterEdit', params: { id: record['id'] } })
     },
     deleteCharacter: function (record) {
-      /*this.axios.delete('/json/delete.json', {
-        params: { 'id': record['ID'] }
-      })*/
+      this.axios.delete('/v1/characters/' + record['id'])
+        .catch(error => {
+          console.log(error)
+        })
 
       for (var i = 0; i < this.characters.length; i++) {
-        if (this.characters[i]['ID'] === record['ID']) {
+        if (this.characters[i]['id'] === record['id']) {
           this.characters.splice(i, 1)
-          console.log('Removed character: ' + record['Name'])
+          console.log('Removed character: ' + record['name'])
         }
       }
     }

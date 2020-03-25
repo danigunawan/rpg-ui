@@ -67,19 +67,17 @@ export default {
       // Data:
       //   Email
       //   Password
-      this.axios.post(this.$store.state.target.url + "/v1/users/", {
+      this.axios.post("/v1/users/", {
         email: this.email,
         password: this.password,
         password_confirmation: this.passwordconfirmation
       })
       .then(response => {
-        console.log(response)
         this.$store.state.user.token = response.data["token"]
         localStorage.setItem("token", response.data["token"])
         this.$router.push({ name: "Home" })
       })
       .catch(error => {
-        console.log(error.response.data["error"])
         this.errors = error.response.data["error"].split("\n")
       })
     }

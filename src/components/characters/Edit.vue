@@ -36,6 +36,7 @@ export default {
   name: 'CharactersEdit',
   data () {
     return {
+      id: '',
       name: '',
       description: '',
       show: false,
@@ -48,7 +49,20 @@ export default {
 
   methods: {
     submitData: function() {
-      this.show = !this.show
+      this.axios.put('/v1/characters/' + this.id, {
+        id: this.id,
+        name: this.name,
+        description: this.description
+      })
+        .then(response => {
+          this.show = !this.show
+          this.id = response.data['id']
+          this.name = response.data["name"]
+          this.description = response.data["description"]
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     dismissed: function () {
       console.log('Alert dismissed')
@@ -56,6 +70,7 @@ export default {
     fetchData: function () {
       this.axios.get('/v1/characters/' + this.$route.params.id)
         .then((response) => {
+          this.id = response.data['id']
           this.name = response.data["name"]
           this.description = response.data["description"]
         })
