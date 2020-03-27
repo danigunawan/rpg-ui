@@ -2,27 +2,22 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 
-import Home from '@/views/Home.vue'
-
-import Login from '@/views/auth/Login.vue'
-import Logout from '@/views/auth/Logout.vue'
-import Register from '@/views/auth/Register.vue'
-
+// Middleware
 import Guest from '@/router/middleware/guest.js'
 import Auth from '@/router/middleware/auth.js'
 import middlewarePipeline from '@/router/middlewarePipeline.js'
 
-import CharacterList from '@/views/characters/List.vue'
-import CharacterNew from '@/views/characters/New.vue'
-import CharacterEdit from '@/views/characters/Edit.vue'
-
 Vue.use(VueRouter)
+
+function loadView(view) {
+  return () => import(/* webpackChunkName: "view-[request]" */ `@/views/${view}.vue`)
+}
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: loadView('Home'),
     meta: {
       middleware: [
         Auth
@@ -32,7 +27,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: loadView('auth/Login'),
     meta: {
       middleware: [
         Guest
@@ -42,7 +37,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: Register,
+    component: loadView('auth/Register'),
     meta: {
       middleware: [
         Guest
@@ -52,7 +47,7 @@ const routes = [
   {
     path: '/logout',
     name: 'Logout',
-    component: Logout,
+    component: loadView('auth/Logout'),
     meta: {
       middleware: [
         Auth
@@ -62,7 +57,7 @@ const routes = [
   {
     path: '/characters',
     name: 'CharacterList',
-    component: CharacterList,
+    component: loadView('characters/List'),
     meta: {
       middleware: [
         Auth
@@ -72,7 +67,7 @@ const routes = [
   {
     path: '/characters/new',
     name: 'CharacterNew',
-    component: CharacterNew,
+    component: loadView('characters/New'),
     meta: {
       middleware: [
         Auth
@@ -82,7 +77,7 @@ const routes = [
   {
     path: '/character/:id',
     name: 'CharacterEdit',
-    component: CharacterEdit,
+    component: loadView('characters/Edit'),
     meta: {
       middleware: [
         Auth
