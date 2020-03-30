@@ -87,7 +87,7 @@ const routes = [
   {
     path: '/campaigns',
     name: 'CampaignsList',
-    component: loadView('campaigns/List')
+    component: loadView('campaigns/List'),
     meta: {
       middleware: [
         Auth
@@ -97,7 +97,7 @@ const routes = [
   {
     path: '/campaigns/new',
     name: 'CampaignsNew',
-    component: loadView('campaigns/New')
+    component: loadView('campaigns/New'),
     meta: {
       middleware: [
         Auth
@@ -107,7 +107,7 @@ const routes = [
   {
     path: '/campaigns/:id',
     name: 'CampaignsEdit',
-    component: loadView('campaigns/Edit')
+    component: loadView('campaigns/Edit'),
     meta: {
       middleware: [
         Auth
