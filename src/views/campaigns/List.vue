@@ -1,14 +1,30 @@
-const ModalWindow = () => ({
-  component: import('./ModalWindow.vue'),
-  loading: LoadingComponent,
-  error: ErrorComponent,
-  // The error component will be displayed if a timeout is
-  // provided and exceeded. Default: Infinity.
-  timeout: 3000
-})
+<template>
+  <div class="container">
+    <div id="header" class="text-left">
+      <b-button
+        :to='{ name: "CampaignNew" }'
+        variant='primary'
+      >
+        Create
+      </b-button>
+    </div>
+    <CampaignsList/>
+  </div>
+</template>
+
+<script>
+import CampaignsList from '@/components/campaigns/List.vue'
 
 export default {
+  name: 'CampaignList',
   components: {
-    ModalWindow
+    CampaignsList
   }
 }
+</script>
+
+<style scoped>
+#header {
+  padding-bottom: 15px;
+}
+</style>
