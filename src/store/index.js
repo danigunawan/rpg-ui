@@ -8,6 +8,7 @@ export default new Vuex.Store({
     user: {
       token: localStorage.getItem("token")
     },
+    campaign_id: ""
   },
   getters: {
     auth(state) {

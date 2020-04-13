@@ -1,15 +1,15 @@
 <template>
   <b-table-lite striped hover
     head-variant="dark"
-    :items="campaigns"
+    :items="quests"
     :fields="fields"
     @row-clicked="rowClickedHandler"
   >
     <template v-slot:cell(modify)="row">
-      <b-button variant="danger" @click="deleteCampaign(row.item)" class="mr-1 btn-delete">
+      <b-button variant="danger" @click="deletequest(row.item)" class="mr-1 btn-delete">
         Delete
       </b-button>
-      <b-button variant="primary" @click="editCampaign(row.item)" class="mr-1 btn-edit">
+      <b-button variant="primary" @click="editquest(row.item)" class="mr-1 btn-edit">
         Edit
       </b-button>
     </template>
@@ -18,11 +18,11 @@
 
 <script>
 export default {
-  name: 'CampaignsList',
+  name: 'QuestsList',
   data () {
     return {
-      message: 'Campaigns',
-      campaigns: [],
+      id: '',
+      quests: [],
       fields: [
         { key: 'name', label: 'Name' },
         { key: 'description', label: 'Description' },
@@ -37,34 +37,35 @@ export default {
 
   methods: {
     fetchData: function () {
-      this.axios.get("/v1/campaigns")
-      //this.axios.get('http://localhost:8080/json/campaigns.json')
+      this.axios.get("/v1/quests/" + this.$route.params.id)
+      //this.axios.get('http://localhost:8080/json/quests.json')
         .then(response => {
-          this.campaigns = response.data["campaigns"]
+          this.quests = response.data["quests"]
         })
         .catch(function (error) {
           console.log(error)
         })
+      this.$store.state.campaign_id = this.$route.params.id
     },
     rowClickedHandler (record) {
       console.log(record['id'])
-      this.$router.push({ name: 'QuestsList', params: { id: record['id'] } })
+    this.$router.push({ name: 'QuestsEdit', params: { id: record['id'] } })
     },
-    deleteCampaign: function (record) {
-      this.axios.delete('/v1/campaigns/' + record['id'])
+    deletequest: function (record) {
+      this.axios.delete('/v1/quests/' + record['id'])
         .catch(error => {
           console.log(error)
         })
 
-      for (var i = 0; i < this.campaigns.length; i++) {
-        if (this.campaigns[i]['id'] === record['id']) {
-          this.campaigns.splice(i, 1)
-          console.log('Removed campaign: ' + record['name'])
+      for (var i = 0; i < this.quests.length; i++) {
+        if (this.quests[i]['id'] === record['id']) {
+          this.quests.splice(i, 1)
+          console.log('Removed quest: ' + record['name'])
         }
       }
     },
-    editCampaign: function (record) {
-      this.$router.push({ name: 'CampaignsEdit', params: { id: record['id'] } })
+    editquest: function (record) {
+      this.$router.push({ name: 'QuestsEdit', params: { id: record['id'] } })
     }
   }
 }

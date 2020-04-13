@@ -113,6 +113,36 @@ const routes = [
         Auth
       ]
     }
+  },
+  {
+    path: '/quests/:id',
+    name: 'QuestsList',
+    component: loadView('quests/List'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
+  },
+  {
+    path: '/quests/new',
+    name: 'QuestsNew',
+    component: loadView('quests/New'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
+  },
+  {
+    path: '/quests/show/:id',
+    name: 'QuestsEdit',
+    component: loadView('quests/Edit'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
   }
 ]
 
