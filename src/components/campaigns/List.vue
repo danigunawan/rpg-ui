@@ -5,9 +5,12 @@
     :fields="fields"
     @row-clicked="rowClickedHandler"
   >
-    <template v-slot:cell(delete)="row">
+    <template v-slot:cell(modify)="row">
       <b-button variant="danger" @click="deleteCampaign(row.item)" class="mr-1 btn-delete">
         Delete
+      </b-button>
+      <b-button variant="primary" @click="editCampaign(row.item)" class="mr-1 btn-edit">
+        Edit
       </b-button>
     </template>
   </b-table-lite>
@@ -23,7 +26,7 @@ export default {
       fields: [
         { key: 'name', label: 'Name' },
         { key: 'description', label: 'Description' },
-        { key: 'delete', label: '' }
+        { key: 'modify', label: '' }
       ]
     }
   },
@@ -59,6 +62,9 @@ export default {
           console.log('Removed campaign: ' + record['name'])
         }
       }
+    },
+    editCampaign: function (record) {
+      this.$router.push({ name: 'CampaignsEdit', params: { id: record['id'] } })
     }
   }
 }
@@ -75,6 +81,10 @@ export default {
 }
 
 .btn-delete {
+  float: right;
+}
+
+.btn-edit {
   float: right;
 }
 </style>

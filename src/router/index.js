@@ -105,7 +105,7 @@ const routes = [
     }
   },
   {
-    path: '/campaigns/:id',
+    path: '/campaigns/show/:id',
     name: 'CampaignsEdit',
     component: loadView('campaigns/Edit'),
     meta: {

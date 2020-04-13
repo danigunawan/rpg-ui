@@ -68,7 +68,7 @@ export default {
       console.log('Alert dismissed')
     },
     fetchData: function () {
-      this.axios.get('/v1/campaigns/' + this.$route.params.id)
+      this.axios.get('/v1/campaigns/show/' + this.$route.params.id)
         .then((response) => {
           this.id = response.data['id']
           this.name = response.data["name"]
