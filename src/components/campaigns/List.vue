@@ -45,7 +45,7 @@ export default {
     },
     rowClickedHandler (record) {
       console.log(record['id'])
-      this.$router.push({ name: 'CampaignEdit', params: { id: record['id'] } })
+      this.$router.push({ name: 'CampaignsEdit', params: { id: record['id'] } })
     },
     deleteCampaign: function (record) {
       this.axios.delete('/v1/campaigns/' + record['id'])

@@ -47,8 +47,8 @@ export default {
         description: this.description
       })
       .then(response => {
-        console.log(response.data["message"])
-        this.$router.push({ name: "CampaignList" })
+        console.log(response.data["id"])
+        this.$router.push({ name: "CampaignsList" })
       })
       .catch(error => {
         this.errors = error.response.data["error"].split('\n')

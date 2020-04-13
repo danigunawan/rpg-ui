@@ -2,7 +2,7 @@
   <div class="container">
     <div id="header" class="text-left">
       <b-button
-        :to='{ name: "CampaignNew" }'
+        :to='{ name: "CampaignsNew" }'
         variant='primary'
       >
         Create
