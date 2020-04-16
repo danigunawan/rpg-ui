@@ -143,6 +143,36 @@ const routes = [
         Auth
       ]
     }
+  },
+  {
+    path: '/maps/:id',
+    name: 'MapsList',
+    component: loadView('maps/List'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
+  },
+  {
+    path: '/maps/new',
+    name: 'MapsNew',
+    component: loadView('maps/New'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
+  },
+  {
+    path: '/maps/show/:id',
+    name: 'MapsEdit',
+    component: loadView('maps/Edit'),
+    meta: {
+      middleware: [
+        Auth
+      ]
+    }
   }
 ]
 

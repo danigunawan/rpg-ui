@@ -28,9 +28,9 @@ instance.interceptors.response.use(response => {
   console.log(data)
 
   if ([401,417].indexOf(status) !== -1) {
-    if (data.error.indexOf('Token is already revoked') ||
-        data.error.indexOf('token invalid') ||
-        data.error.indexOf('Token is expired')) {
+    if (data.error == 'Token is already revoked' ||
+        data.error == 'token invalid' ||
+        data.error == 'Token is expired') {
       localStorage.removeItem('token')
     }
   }

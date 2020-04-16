@@ -8,7 +8,8 @@ export default new Vuex.Store({
     user: {
       token: localStorage.getItem("token")
     },
-    campaign_id: ""
+    campaign_id: "",
+    quest_id: ""
   },
   getters: {
     auth(state) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    clearToken(state) {
+      state.user.token = ""
+    }
   },
   actions: {
   },

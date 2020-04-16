@@ -1,15 +1,15 @@
 <template>
   <b-table-lite striped hover
     head-variant="dark"
-    :items="quests"
+    :items="maps"
     :fields="fields"
     @row-clicked="rowClickedHandler"
   >
     <template v-slot:cell(modify)="row">
-      <b-button variant="danger" @click="deletequest(row.item)" class="mr-1 btn-delete">
+      <b-button variant="danger" @click="deletemap(row.item)" class="mr-1 btn-delete">
         Delete
       </b-button>
-      <b-button variant="primary" @click="editquest(row.item)" class="mr-1 btn-edit">
+      <b-button variant="primary" @click="editmap(row.item)" class="mr-1 btn-edit">
         Edit
       </b-button>
     </template>
@@ -18,11 +18,11 @@
 
 <script>
 export default {
-  name: 'QuestsList',
+  name: 'MapsList',
   data () {
     return {
       id: '',
-      quests: [],
+      maps: [],
       fields: [
         { key: 'name', label: 'Name' },
         { key: 'description', label: 'Description' },
@@ -37,35 +37,35 @@ export default {
 
   methods: {
     fetchData: function () {
-      this.axios.get("/v1/quests/" + this.$route.params.id)
-      //this.axios.get('http://localhost:8080/json/quests.json')
+      this.axios.get("/v1/maps/" + this.$route.params.id)
+      //this.axios.get('http://localhost:8080/json/maps.json')
         .then(response => {
-          this.quests = response.data["quests"]
+          this.maps = response.data["maps"]
         })
         .catch(function (error) {
           console.log(error)
         })
-      this.$store.state.campaign_id = this.$route.params.id
+      this.$store.state.quest_id = this.$route.params.id
     },
     rowClickedHandler (record) {
       console.log(record['id'])
-      this.$router.push({ name: 'MapsList', params: { id: record['id'] } })
+      this.$router.push({ name: 'MapsEdit', params: { id: record['id'] } })
     },
-    deletequest: function (record) {
-      this.axios.delete('/v1/quests/' + record['id'])
+    deletemap: function (record) {
+      this.axios.delete('/v1/maps/' + record['id'])
         .catch(error => {
           console.log(error)
         })
 
-      for (var i = 0; i < this.quests.length; i++) {
-        if (this.quests[i]['id'] === record['id']) {
-          this.quests.splice(i, 1)
-          console.log('Removed quest: ' + record['name'])
+      for (var i = 0; i < this.maps.length; i++) {
+        if (this.maps[i]['id'] === record['id']) {
+          this.maps.splice(i, 1)
+          console.log('Removed map: ' + record['name'])
         }
       }
     },
-    editquest: function (record) {
-      this.$router.push({ name: 'QuestsEdit', params: { id: record['id'] } })
+    editmap: function (record) {
+      this.$router.push({ name: 'MapsEdit', params: { id: record['id'] } })
     }
   }
 }
