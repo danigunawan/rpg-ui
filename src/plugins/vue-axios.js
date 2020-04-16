@@ -24,6 +24,9 @@ instance.interceptors.response.use(response => {
   const { response: { data } } = error
   // const originalRequest = config;
 
+  console.log(status)
+  console.log(data)
+
   if ([401,417].indexOf(status) !== -1) {
     if (data.error.indexOf('Token is already revoked') ||
         data.error.indexOf('token invalid') ||
