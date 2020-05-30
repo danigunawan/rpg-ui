@@ -1,5 +1,5 @@
-export default function guest ({next, store}) {
-  if (store.getters.auth.token) {
+export default function guest ({next}) {
+  if (!localStorage.getItem("token")) {
     return next({
       name: 'Home'
     })
