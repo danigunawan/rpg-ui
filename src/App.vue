@@ -19,7 +19,7 @@
 export default {
   computed: {
     loggedIn: function() {
-       return Boolean(this.$store.state.user.token)
+       return Boolean(localStorage.getItem("token"))
     }
   }
 }
